@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    />
+    <!-- Bootstrap Grid Stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap-grid.min.css"
+      integrity="sha512-QTQigm89ZvHzwoJ/NgJPghQPegLIwnXuOXWEdAjjOvpE9uaBGeI05+auj0RjYVr86gtMaBJRKi8hWZVsrVe/Ug=="
+      crossorigin="anonymous"
+    />
+    <!-- Own Stylesheet -->
+    <link rel="stylesheet" href="/css/app.css" />
+    <title><%= producto.name %></title>
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <main>
+      <h1>Detalle del Producto: <%= producto.name %></h1>
+      
+          <section class="product-boc product-detail-container">
+            <div class="row">
+            <div class="col-12 col-lg-8">
+              <img src="/images/products/<%= producto.image %>" alt=""  class="product-detail-img"/>
+              <p class="product-detail-description"><%= producto.description %></p>
+            </div>
+            <div class="col-12 col-lg-4">
+              <article class="product-detail-info">
+                <h2 class="product-detail-title"><%= producto.name %></h2>
+                <% let finalPrice= producto.price -producto.price *producto.discount /100; const toThousand = n =>n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");  finalPrice= toThousand(finalPrice);%>
+							<% if (producto.discount) {%>
+								
+							
+							<p class="product-detail-price small">
+								<span>$<%= toThousand(producto.price)%></span>
+								<b><%= producto.discount%>%OFF</b>
+							</p>
+							<p class="product-detail-price">
+								$<%= finalPrice%>
+							</p>
+							<%} %> 
+							<% if (!producto.discount) {%>
+							<p class="product-detail-price">
+								$<%= toThousand(producto.price)%>
+							</p>
+							<%} %> 
+              <ul class="actions-list">
+                <li>
+                  <i class="fas fa-credit-card"></i>
+                  <p>Pagá en 12 cuotas sin interes</p>
+                </li>
+                <li>
+                  <i class="fas fa-store"></i>
+                  <p>Retiro gratis en locales del vendedor</p>
+                </li>
+              </ul>
+              <a href="#" class="buy-now-button">Comprar ahora</a>
+            </div>
+          </div>
+          </section>
+        
+    </main>
+    <%- include('partials/footer') %>
+  </body>
+</html>
